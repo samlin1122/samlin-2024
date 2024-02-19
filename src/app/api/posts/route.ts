@@ -1,11 +1,10 @@
-import { NextResponse, NextRequest } from "next/server";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import mongoDBConnect from "@/libs/mongoDB";
 import Post from "@/models/post";
 
-const url = "https://jsonplaceholder.typicode.com/posts";
+// const url = "https://jsonplaceholder.typicode.com/posts";
 
-export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async () => {
   try {
     await mongoDBConnect();
     const allPost = await Post.find();
@@ -15,7 +14,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export const POST = async (req: Request, res: NextApiResponse) => {
+export const POST = async (req: Request) => {
   try {
     const { title, description } = await req.json();
     const newPost = { title, description };
